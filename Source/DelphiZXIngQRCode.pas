@@ -1165,7 +1165,7 @@ begin
     end else
     begin
       Result := qmByte;
-      EncodeOptions := 4;
+      EncodeOptions := Ord(qrUTF8NoBOM);
     end;
   end else
   if (EncodeOptions = 1) then
@@ -1629,7 +1629,7 @@ begin
       Bytes[I - 1] := Ord(Content[I]) and $FF;
     end;
   end else
-  if (EncodeOptions = 4) then
+  if (EncodeOptions = Ord(qrUTF8BOM)) then
   begin
     // Add the UTF-8 BOM
     UTF8Version := #$EF#$BB#$BF + UTF8Encode(Content);
@@ -1639,7 +1639,7 @@ begin
       Move(UTF8Version[1], Bytes[0], Length(UTF8Version));
     end;
   end else
-  if (EncodeOptions = 5) then
+  if (EncodeOptions = Ord(qrUTF8NoBOM)) then
   begin
     // No BOM
     UTF8Version := UTF8Encode(Content);
